@@ -1,6 +1,7 @@
-# .gitignore
-.venv/
-__pycache__/
-*.pyc
+# Daj instrukciju Gitu da ignoriše tajne fajlove
 .env
+.env.*
+__pycache__/
 .pytest_cache/
+.venv/
+v envy/
