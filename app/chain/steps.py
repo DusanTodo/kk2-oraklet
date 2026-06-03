@@ -1,6 +1,6 @@
+import requests
 from pydantic import BaseModel
 from app.chain.runnable import Runnable
-from app.config import settings
 from app.utils.config import config
 
 # förfrågnings basemodel med indata, det som vi skickar till ai
