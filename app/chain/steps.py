@@ -18,7 +18,7 @@ class PromptBuilder(Runnable[AskRequest, str]):
 
     def invoke(self, data: AskRequest) -> str:
         return f"""Du är en Bitcoin-analytiker. Här är den aktuella statistiken:
-- Senaste pris: {data.stats['latest_close']} USD
+- Senaste pris: {data.stats['senaste_pris']} USD
 - Payday FOMO-signal: {data.stats['payday_fomo']}
 - Bollinger Band-signal: {data.stats['bollinger_signal']}
 
