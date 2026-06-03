@@ -3,7 +3,7 @@ import pandas as pd
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from app.chain.steps import AskRequest
 from app.chain.pipeline import ask_pipeline
-from app.utils.config import config
+from app.utils.config import settings
 
 # fastapi app creation
 app = FastAPI(

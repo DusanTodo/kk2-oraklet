@@ -1,5 +1,5 @@
 import pandas as pd
-from app.config import settings
+from app.utils.config import settings
 
 class BitcoinData:
     def __init__(self):

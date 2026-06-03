@@ -22,3 +22,4 @@ class LLMOutput(BaseModel):
 class FinalResponse(BaseModel):
     question: str
     answer: str
+    model: str

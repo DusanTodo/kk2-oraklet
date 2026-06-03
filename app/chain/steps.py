@@ -1,7 +1,7 @@
 import requests
 from pydantic import BaseModel
 from app.chain.runnable import Runnable
-from app.utils.config import config
+from app.utils.config import settings
 
 # förfrågnings basemodel med indata, det som vi skickar till ai
 class AskRequest(BaseModel):
@@ -34,11 +34,11 @@ class LLMRunner(Runnable[str, str]):
         response = requests.post(
             url="https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": f"Bearer {config.openrouter_api_key}",
+                "Authorization": f"Bearer {settings.openrouter_api_key}",
                 "Content-Type": "application/json"
             },
             json={
-                "model": config.openrouter_model,
+                "model": settings.openrouter_model,
                 "messages": [{"role": "user", "content": prompt}]
             }
         )
