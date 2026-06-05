@@ -4,6 +4,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from app.chain.steps import AskRequest
 from app.chain.pipeline import ask_pipeline
 from app.utils.config import settings
+from app.schemas import QueryInput
 
 # fastapi app creation
 app = FastAPI(
@@ -49,7 +50,7 @@ def get_stats():
 
 # fråga LLM om datat
 @app.post("/ai/ask")
-def ask(request: AskRequest):
+def ask(request: QueryInput):
     if uploaded_df is None:
         raise HTTPException(status_code=400, detail="Ladda upp ett dataset först via /data/upload")
 
