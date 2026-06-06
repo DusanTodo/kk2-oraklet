@@ -1,5 +1,6 @@
 import io
 import pandas as pd
+from app.data import btc_data
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from app.chain.steps import AskRequest
 from app.chain.pipeline import ask_pipeline
@@ -54,7 +55,7 @@ def ask(request: QueryInput):
     if uploaded_df is None:
         raise HTTPException(status_code=400, detail="Ladda upp ett dataset först via /data/upload")
 
-    stats = uploaded_df.describe().to_dict()
+    stats = btc_data.get_stats()
     enriched_request = AskRequest(question=request.question, stats=stats)
 
     result = ask_pipeline.invoke(enriched_request)
