@@ -5,7 +5,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from app.chain.steps import AskRequest
 from app.chain.pipeline import ask_pipeline
 from app.utils.config import settings
-from app.schemas import QueryInput
+from app.schemas import QueryInput, FinalResponse
 
 # fastapi app creation
 app = FastAPI(
@@ -50,7 +50,7 @@ def get_stats():
     return uploaded_df.describe().to_dict()
 
 # fråga LLM om datat
-@app.post("/ai/ask")
+@app.post("/ai/ask", response_model=FinalResponse)
 def ask(request: QueryInput):
     if uploaded_df is None:
         raise HTTPException(status_code=400, detail="Ladda upp ett dataset först via /data/upload")
@@ -59,8 +59,8 @@ def ask(request: QueryInput):
     enriched_request = AskRequest(question=request.question, stats=stats)
 
     result = ask_pipeline.invoke(enriched_request)
-    return {
-        "question": request.question,
-        "answer": result.answer,
-        "model": "openai/gpt-5.4-mini"
-    }
+    return FinalResponse(
+    question=request.question,
+    answer=result.answer,
+    model=settings.openrouter_model
+)
