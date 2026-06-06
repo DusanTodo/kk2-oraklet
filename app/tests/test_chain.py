@@ -6,7 +6,7 @@ def test_prompt_builder_innehåller_frågan():
     request = AskRequest(
         question="Ska jag köpa Bitcoin nu?",
         stats={
-            "latest_close": 50000,
+            "senaste_pris": 50000,
             "payday_fomo": "Hög (Lönedags!)",
             "bollinger_signal": "Normal – inom Bollinger-banden"
         }
